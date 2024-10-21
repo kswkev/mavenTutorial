@@ -1,0 +1,67 @@
+Install maven
+
+using choco (windows)
+choco install maven
+
+using brew (macOS)
+brew install maven
+
+using apt (linux)
+apt install maven
+
+manually
+download maven from https://maven.apache.org/download.cgi
+unzip archive to where you want maven installed
+add the maven bin directory to your path either by using the Windows Edit environment variable settings or by the Linux cmd
+“export PATH=”/your/dir:$PATH"”
+
+installation can be verified by using the command mvn -variable (might need to start a new console session)
+
+
+Maven wrapper
+
+The maven wrapper allows those that clone your project to carry out maven commands without having to have maven installed.
+The command mvn wrapper:wrapper adds 2 new files to your project mvnw (for linux) and mvnw.cmd (for windows), these can be used instead of a maven installation
+
+
+Maven validate project
+
+The maven command mvn validate checks that the project has a valid pom in the current directory
+
+
+Basic pom.xml
+
+<project>
+  <modelVersion>4.0.0</modelVersion>
+ 
+  <groupId>com.mycompany.app</groupId>
+  <artifactId>my-app</artifactId>
+  <version>1</version>
+</project>
+
+The groupId, artifactId and version are combined to make the artifact name using <groupId>:<artifactId>:<version>, the above would create the artifact com.mycompany.app:my-app:1
+
+
+Properties
+
+The properties section of the pom either provides maven with information using specific named properties or creates custom properties that can be used elsewhere in the pom
+
+<properties>
+	<maven.compiler.source>11</maven.compiler.source>
+	<maven.compiler.target>11</maven.compiler.target>
+	
+	<junit.version>5.8.2</junit.version>
+</properties>
+
+In the above example the maven.compiler properties tell maven which version of the JDK to use, the junit.version property will be used elsewhere in the pom e.g.
+
+<dependency>
+	<groupId>org.junit.jupiter</groupId>
+	<artifactId>junit-jupiter-engine</artifactId>
+	<version>${junit.version}</version>
+	<scope>test</scope>
+</dependency>
+
+${} is used to refer to a property
+
+
